@@ -1,0 +1,23 @@
+name: fixer
+on:
+  push:
+    branches: [master]
+
+jobs:
+  duplicates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run fixer script
+        run: |
+          python lime_fixer.py
+
+      - name: Commit and push fixed file
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add gamecontrollerdb_fixed.txt
+          git commit -m "Add fixed gamecontrollerdb.txt" || echo "No changes to commit"
+          git push
+
