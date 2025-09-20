@@ -11,7 +11,7 @@ jobs:
 
       - name: Run fixer script
         run: |
-          python lime_fixer.py
+          python fixer.py
 
       - name: Commit and push fixed file
         run: |
