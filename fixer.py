@@ -1,26 +1,29 @@
-# read the input file
-with open("gamecontrollerdb.txt", "r", encoding="utf-8") as f:
+input_file = "gamecontrollerdb.txt"
+output_file = "gamecontrollerdb_fixed.txt"
+
+with open(input_file, "r", encoding="utf-8") as f:
     lines = f.readlines()
 
 output_lines = []
 
 for line in lines:
-    line = line.rstrip("\n")  # remove newline
+    line = line.rstrip("\n")
 
-    # ignore comment lines
+    # Ignore comments or empty lines
     if line.startswith("#") or line.strip() == "":
         output_lines.append(line)
         continue
 
-    # find last comma
+    # Wrap in quotes before the last comma
     if line.endswith(","):
-        line = '"' + line[:-1] + '",'
+        line = f'"{line[:-1]}",'
     else:
-        line = '"' + line + '"'
+        line = f'"{line}"'
 
+    # Add 3 tabs at the start
+    line = "\t\t\t" + line
     output_lines.append(line)
 
-# write back to file or a new file
-with open("gamecontrollerdb_fixed.txt", "w", encoding="utf-8") as f:
+with open(output_file, "w", encoding="utf-8") as f:
     for line in output_lines:
         f.write(line + "\n")
