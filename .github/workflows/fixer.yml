@@ -8,7 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
+      
+      - name: Run duplicates script
+        run: |
+          python duplicates.py
+          
       - name: Run fixer script
         run: |
           python fixer.py
@@ -18,6 +22,6 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add gamecontrollerdb_fixed.txt
-          git commit -m "Add fixed gamecontrollerdb.txt" || echo "No changes to commit"
+          git commit -m "updated fixed gamecontrollerdb.txt" || echo "No changes to commit"
           git push
 
